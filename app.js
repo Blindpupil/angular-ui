@@ -1,4 +1,4 @@
-(function () {
+(function () {  //IIFE
 'use strict';
 
 var agentsList = [
@@ -16,17 +16,27 @@ var pagesList = [
 
 angular.module('HypesiloApp', [])
 .controller('DisplayAgentsController', DisplayAgentsController)
-.service('ShowAvAgentsService', ShowAvAgentsService);
-
+.controller('PagesController', PagesController)
+.service('ShowAvAgentsService', ShowAvAgentsService)
+.service('ShowPagesService', ShowPagesService);
 
 //here are the controllers that take whatever happened in the logic and implements it in the view
 DisplayAgentsController.$inject = ['ShowAvAgentsService'];
 function DisplayAgentsController(ShowAvAgentsService) {
-  var list = this;  //this works because of the Controller As syntax
+  var list = this;
 
   list.agents = ShowAvAgentsService.getAgents();
 
 }
+
+PagesController.$inject = ['ShowPagesService'];
+function PagesController(ShowPagesService) {
+  var page = this;
+  
+  page.data = ShowPagesService.getPages();
+  
+}
+
 
 
 //the business logic is defined below
@@ -38,6 +48,16 @@ function ShowAvAgentsService() {
 
   service.getAgents = function () {  //this one exposes the internal items array to the outside
     return agents;
+  };
+}
+
+function ShowPagesService() {
+  var service = this;
+  
+  var data = pagesList; 
+  
+  service.getPages = function() {
+    return data;;
   };
 }
 
