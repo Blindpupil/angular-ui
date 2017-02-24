@@ -1,3 +1,21 @@
+/*HypeSilo CSS*/
 .agentNumber {
     width: 30px !important;
+}
+
+.hypesilo-logo-white {
+  width: 160px;
+}
+
+.addTag {
+    float: left !important;
+}
+
+
+.addTag li input {
+    width: 57%;
+}
+
+.addTag li a {
+    margin-left: 0px !important;
 }

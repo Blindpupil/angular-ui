@@ -17,48 +17,91 @@ var pagesList = [
 angular.module('HypesiloApp', [])
 .controller('DisplayAgentsController', DisplayAgentsController)
 .controller('PagesController', PagesController)
-.service('ShowAvAgentsService', ShowAvAgentsService)
-.service('ShowPagesService', ShowPagesService);
+.controller('TagsMakerController', TagsMakerController)
+.controller('TagsShowController', TagsShowController)
+.service('ShowDataService', ShowDataService)
+.service('TagsService', TagsService);
 
 //here are the controllers that take whatever happened in the logic and implements it in the view
-DisplayAgentsController.$inject = ['ShowAvAgentsService'];
-function DisplayAgentsController(ShowAvAgentsService) {
+DisplayAgentsController.$inject = ['ShowDataService'];
+function DisplayAgentsController(ShowDataService) {
   var list = this;
 
-  list.agents = ShowAvAgentsService.getAgents();
+  list.agents = ShowDataService.getAgents();
 
 }
 
-PagesController.$inject = ['ShowPagesService'];
-function PagesController(ShowPagesService) {
+PagesController.$inject = ['ShowDataService'];
+function PagesController(ShowDataService) {
   var page = this;
   
-  page.data = ShowPagesService.getPages();
+  page.data = ShowDataService.getPages();
   
 }
 
 
+TagsMakerController.$inject = ['TagsService']
+function TagsMakerController(TagsService) {
+  var tagAdder = this;
+  tagAdder.tag_name = "";
+ 
+ tagAdder.addTag = function() {
+   TagsService.addTag(tagAdder.tag_name);
+ };
+}
 
-//the business logic is defined below
-function ShowAvAgentsService() {
-  var service = this;   //since it's a function constructor we can use 'this'. Now instead of 'this' every time we'll call it service
-
-  // List of shopping items
-  var agents = agentsList;
-
-  service.getAgents = function () {  //this one exposes the internal items array to the outside
-    return agents;
+TagsShowController.$inject = ['TagsService']
+function TagsShowController(TagsService) {
+  var showTag = this;
+  
+  showTag.tags = TagsService.getTags();
+  
+  showTag.removeTag = function (tagIndex) {
+    TagsService.removeTag(tagIndex);
   };
 }
 
-function ShowPagesService() {
-  var service = this;
+//the business logic is defined below
+function ShowDataService() {
+  var service = this;   
   
-  var data = pagesList; 
+  // Lists
+  var agents = agentsList;
+  
+  var data = pagesList;
+  
+  service.getAgents = function () {  //this exposes the internal items array to the outside
+    return agents;
+  };
   
   service.getPages = function() {
     return data;;
   };
+  
+}
+
+//For the tags I'm adding the add tag functionality, not using a pre-existing database
+function TagsService() {
+  var service = this;
+  
+  var tags = [];
+  
+  //tag_activity parameter needs to be included later
+  service.addTag = function (tag_name) {
+    var tag = {
+      name: tag_name
+    };
+    tags.push(tag);
+  };
+  
+  service.removeTag = function (tagIndex) {
+    tags.splice(tagIndex, 1);
+  };
+  
+  service.getTags = function () {
+    return tags;
+  };
+  
 }
 
 })();

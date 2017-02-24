@@ -14,10 +14,6 @@
 @import "dropzone/dropzone.css";
 @import "animate/animate.min.css";
 
-/*HypeSilo CSS*/
-.hypesilo-logo-white {
-  width: 160px;
-}
 
 .sales-event-small {
   display: none;

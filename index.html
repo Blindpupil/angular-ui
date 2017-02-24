@@ -286,13 +286,13 @@
 
                             <!-- START TAGS BLOCK -->
                             <div class="panel panel-default">
-                                <div class="panel-heading">
+                                <div class="panel-heading" ng-controller="TagsMakerController as tagAdder">
                                     <div class="panel-title-box">
                                         <h3>TAGS</h3>
-                                        <span>Add your own custom tags to be followed. <br> Tags help identify sales leads.</span>
+                                        <span>Add your own custom tags to be followed. </span>  <br>
+                                        <span style="font-size: 10px;">Tags help identify sales leads.</span>
                                     </div>
                                     <ul class="panel-controls" style="margin-top: 2px;">
-                                        <li data-toggle="tooltip" data-placement="top" title="Add New Tag"><a href="#" class=""><span class="fa fa-plus"></span></a></li>
                                         <li data-toggle="tooltip" data-placement="top" title="Expand"><a href="#" class="panel-fullscreen"><span class="fa fa-expand"></span></a></li>
                                         <li data-toggle="tooltip" data-placement="top" title="Refresh"><a href="#" class="panel-refresh"><span class="fa fa-refresh"></span></a></li>
                                         <li class="dropdown">
@@ -303,38 +303,46 @@
                                             </ul>
                                         </li>
                                     </ul>
+                                    <ul class="addTag panel-controls" style="margin-top: 2px;">
+                                        <li data-toggle="tooltip" data-placement="top" title="Add New Tag">
+                                            <a href="#" ng-click="tagAdder.addTag();"><span class="fa fa-plus"></span></a>
+                                        </li>
+                                        <li>
+                                          <input type="text" name="Add Tag" placeholder="Type Tag" class="form-control" ng-model="tagAdder.tag_name"/>
+                                        </li>
+                                    </ul>
                                 </div>
-                                <div class="panel-body panel-body-table">
+                                <div class="panel-body panel-body-table" ng-controller="TagsShowController as showTag">
 
                                     <div class="table-responsive">
                                         <table class="table table-bordered table-striped">
                                             <thead>
                                                 <tr>
-                                                    <th width="15%">TAGS</th>
+                                                    <th width="15%">Tags</th>
                                                     <th width="5%">Status</th>
                                                     <th width="20%">Activity</th>
                                                 </tr>
                                             </thead>
                                             <tbody>
-                                                <!--<tr ng-repeat=" in tag.data">-->
-                                                <!--    <td><strong>{{ tag.name }}</strong></td>-->
-                                                <!--    <td><span class="label label-{{ page.page_label }}">{{ page.page_status }}</span></td>-->
-                                                <!--    <td>-->
-                                                <!--        <div class="progress progress-small progress-striped active">-->
-                                                <!--            <div class="progress-bar progress-bar-{{ page.page_label }}" role="progressbar" aria-valuenow="50" aria-valuemin="0" aria-valuemax="100" style="width: {{ page.page_activity }}%;">{{ page.page_activity }}%</div>-->
-                                                <!--        </div>-->
-                                                <!--    </td>-->
-                                                <!--</tr>-->
-                                                
-                                                <tr>
-                                                    <td><strong>Soov</strong></td>
-                                                    <td><a href="#" class="label label-warning">Active</a></td>
+                                                <tr ng-repeat="tag in showTag.tags">
+                                                    <td><strong>{{ tag.name }}</strong></td>
+                                                    <td><button ng-click="showTag.removeTag($index);" class="label label-success">Activated</button></td>
                                                     <td>
                                                         <div class="progress progress-small progress-striped active">
-                                                            <div class="progress-bar progress-bar-warning" role="progressbar" aria-valuenow="50" aria-valuemin="0" aria-valuemax="100" style="width:85%;">85%</div>
+                                                            <div class="progress-bar progress-bar-success" role="progressbar" aria-valuenow="50" aria-valuemin="0" aria-valuemax="100" style="width: 60%;">60%</div> <!--tag_activity needs to be dynamic in the future-->
                                                         </div>
                                                     </td>
                                                 </tr>
+                                                
+                                                <!--<tr>-->
+                                                <!--    <td><strong>Soov</strong></td>-->
+                                                <!--    <td><a href="#" class="label label-warning">Active</a></td>-->
+                                                <!--    <td>-->
+                                                <!--        <div class="progress progress-small progress-striped active">-->
+                                                <!--            <div class="progress-bar progress-bar-warning" role="progressbar" aria-valuenow="50" aria-valuemin="0" aria-valuemax="100" style="width:85%;">85%</div>-->
+                                                <!--        </div>-->
+                                                <!--    </td>-->
+                                                <!--</tr>-->
 
                                             </tbody>
                                         </table>
