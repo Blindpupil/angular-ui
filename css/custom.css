@@ -11,11 +11,24 @@
     float: left !important;
 }
 
-
 .addTag li input {
     width: 57%;
 }
 
 .addTag li a {
     margin-left: 0px !important;
+}
+
+/*Today Stats*/
+.todayStats {
+    color: black !important;
+    background-color: white !important;
+}
+
+.todayStats-title {
+    font-size: 32px !important;
+}
+
+.widget-c3 .col span {
+    font-size: 14px !important;
 }

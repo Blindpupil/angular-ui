@@ -1,10 +1,14 @@
 (function () {  //IIFE
 'use strict';
 
+var todayStatsList = [
+  { ongoing: 24,  sales: 16, other: 8 }
+  ];
+
 var agentsList = [
-    { agent_name: "Marika Saas", agent_url: "#"},
-    { agent_name: "Martin Tiis", agent_url: "#"},
-    { agent_name: "Freddy Lools", agent_url: "#"}
+    { agent_name: "Marika Saas", agent_url: "#" },
+    { agent_name: "Martin Tiis", agent_url: "#" },
+    { agent_name: "Freddy Lools", agent_url: "#" }
     ];
 
 var pagesList = [
@@ -15,6 +19,7 @@ var pagesList = [
 
 
 angular.module('HypesiloApp', [])
+.controller('DisplayStatsController', DisplayStatsController)
 .controller('DisplayAgentsController', DisplayAgentsController)
 .controller('PagesController', PagesController)
 .controller('TagsMakerController', TagsMakerController)
@@ -23,6 +28,15 @@ angular.module('HypesiloApp', [])
 .service('TagsService', TagsService);
 
 //here are the controllers that take whatever happened in the logic and implements it in the view
+DisplayStatsController.$inject = ['ShowDataService'];
+function DisplayStatsController(ShowDataService) {
+  var stats = this;
+  
+  stats.today = ShowDataService.getTodayStats();
+  
+}
+
+
 DisplayAgentsController.$inject = ['ShowDataService'];
 function DisplayAgentsController(ShowDataService) {
   var list = this;
@@ -40,7 +54,7 @@ function PagesController(ShowDataService) {
 }
 
 
-TagsMakerController.$inject = ['TagsService']
+TagsMakerController.$inject = ['TagsService'];
 function TagsMakerController(TagsService) {
   var tagAdder = this;
   tagAdder.tag_name = "";
@@ -50,7 +64,7 @@ function TagsMakerController(TagsService) {
  };
 }
 
-TagsShowController.$inject = ['TagsService']
+TagsShowController.$inject = ['TagsService'];
 function TagsShowController(TagsService) {
   var showTag = this;
   
@@ -61,21 +75,29 @@ function TagsShowController(TagsService) {
   };
 }
 
+
 //the business logic is defined below
 function ShowDataService() {
   var service = this;   
   
   // Lists
+  var today = todayStatsList;
+  
   var agents = agentsList;
   
   var data = pagesList;
   
-  service.getAgents = function () {  //this exposes the internal items array to the outside
+    
+  service.getTodayStats = function() { //this exposes the internal items array to the outside
+    return today;
+  };
+  
+  service.getAgents = function () {  
     return agents;
   };
   
   service.getPages = function() {
-    return data;;
+    return data;
   };
   
 }

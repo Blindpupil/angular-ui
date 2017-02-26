@@ -173,8 +173,73 @@
 
                     <!-- START WIDGETS -->
                     <div class="row">
+                      
                         <div class="col-md-3">
 
+                            <!-- START WIDGET TODAY'S STATS -->
+                            <div class="widget widget-info widget-padding-sm todayStats">
+
+                                <div class="widget-big-int todayStats-title">Todays Stats</div>
+                                
+                                <div class="widget-buttons widget-c3">
+                                   <div class="col">
+                                        <span>Ongoing</span>
+                                    </div>
+                                    <div class="col">
+                                        <span>Sales</span>
+                                    </div>
+                                    <div class="col">
+                                        <span>Other</span>
+                                    </div>
+                                </div>
+                 
+                                <div class="widget-buttons widget-c3" ng-controller="DisplayStatsController as stats">
+                                    <div class="col" ng-repeat="stats in stats.today">
+                                        <span>{{ stats.ongoing }}</span>
+                                    </div>
+                                    <div class="col" ng-repeat="stats in stats.today">
+                                        <span>{{ stats.sales }}</span>
+                                    </div>
+                                    <div class="col" ng-repeat="stats in stats.today">
+                                        <span>{{ stats.other }}</span>
+                                    </div>
+                                </div>
+                                <div class="widget-controls">
+                                    <a href="#" class="widget-control-right widget-remove" data-toggle="tooltip" data-placement="left" title="Remove Widget"><span class="fa fa-times"></span></span>
+                                </div>
+                            </div>                         
+                            
+                            <!-- END TODAY STATS -->
+                        </div>
+                            
+                        <div class="col-md-3">
+
+                            <!-- START WIDGET AGENTS -->
+                            <div class="widget widget-default widget-item-icon" id="Agents" ng-controller='DisplayAgentsController as list'>
+                               <div class="widget-controls">
+                                   <a href="#" class="widget-control-right widget-remove" data-toggle="tooltip" data-placement="top" title="Remove Widget"><span class="fa fa-times"></span></a>
+                               </div>
+                               <div class="widget-item-left">
+                                   <span class="fa fa-user"></span>
+                               </div>
+                               <div class="widget-data">
+                                   <div class="widget-int num-count agentNumber">3</div>
+                                   <a href="#" title="Add new agent"> + Add new</a>
+                                   <div class="widget-title">Available Agents</div>
+                                   <ul>
+                                     <li ng-repeat="list in list.agents" class="widget-subtitle">
+                                       <a href="{{ list.agent_url }}" title="Agent Stats" >{{ list.agent_name }}</a>
+                                     </li>
+                                   </ul>
+                               </div>
+
+                            </div>
+                            <!-- END WIDGET AGENTS -->
+
+                        </div>
+                        
+                          <div class="col-md-3">
+                            
                             <!-- START WIDGET CLOCK -->
                             <div class="widget widget-info widget-padding-sm">
                                 <div class="widget-big-int plugin-clock">00:00</div>
@@ -195,34 +260,15 @@
                                 </div>
                             </div>
                             <!-- END WIDGET CLOCK -->
-
-                        </div>
-                        
-                          <div class="col-md-3">
-
-                            <!-- START WIDGET AGENTS -->
-                            <div class="widget widget-default widget-item-icon" id="Agents" ng-controller='DisplayAgentsController as list'>
-                               <div class="widget-item-left">
-                                   <span class="fa fa-user"></span>
-                               </div>
-                               <div class="widget-data">
-                                   <div class="widget-int num-count agentNumber">3</div>
-                                   <a href="#" title="Add new agent"> + Add new</a>
-                                   <div class="widget-title">Available Agents</div>
-                                   <ul>
-                                     <li ng-repeat="list in list.agents" class="widget-subtitle">
-                                       <a href="{{list.agent_url}}" title="Agent Stats" >{{list.agent_name}}</a>
-                                     </li>
-                                   </ul>
-                               </div>
-                               <div class="widget-controls">
-                                   <a href="#" class="widget-control-right widget-remove" data-toggle="tooltip" data-placement="top" title="Remove Widget"><span class="fa fa-times"></span></a>
-                               </div>
-                            </div>
                             
-                            <!-- END WIDGET AGENTS -->
                         </div>
-                        
+                    
+                    </div>
+                    <!-- END WIDGET ROW -->
+                    
+                    <!-- START BLOCKS -->    
+                    <div class="row">
+                      
                       <div class="col-md-4">
 
                             <!-- START PAGES BLOCK -->
@@ -273,15 +319,10 @@
                                 </div>
                             </div>
                             <!-- END PAGES BLOCK -->
-
-                        </div>  
                         
-                    <!-- End First Row -->
-                    </div>
-                    
-                      
-                    <div class="row">
-                    
+                        </div>
+                        <!-- END PAGES COL -->
+                        
                         <div class="col-md-3">
 
                             <!-- START TAGS BLOCK -->
@@ -356,13 +397,13 @@
                         <!-- END TAGS COL-->
                         
                     </div>
-                    <!-- END 'WIDGETS' ROW -->
+                    <!-- END BLOCKS ROW -->
                     
                     <!-- START DASHBOARD CHART -->
-					<!--<div class="chart-holder" id="dashboard-area-1" style="height: 200px;"></div>-->
-					<!--<div class="block-full-width">-->
+					<div class="chart-holder" id="dashboard-area-1" style="height: 200px;"></div>
+					<div class="block-full-width"></div>
                     <!-- END DASHBOARD CHART -->
-
+                
                 </div>
                 <!-- END PAGE CONTENT WRAPPER -->
             </div>
